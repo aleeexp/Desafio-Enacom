@@ -2,12 +2,12 @@
 import pandas as pd
 
 #importando os dados
-df = pd.read_csv("Tabela.csv", sep=';', encoding='utf-8')
+df = pd.read_csv("Tabela investimento.csv", sep=';', encoding='utf-8')
 
 #colocando dados extras para teste
-df.loc[len(df)] = ({"Opção":"14","Descrição":"Investimento novo","Custo do investimento (R$)":350,"Retorno esperado (R$)":350,"Risco do investimento (R$)":"Alto"})
-df.loc[len(df)] = ({"Opção":"15","Descrição":"Investimento com Erro","Custo do investimento (R$)":-620,"Retorno esperado (R$)":500,"Risco do investimento (R$)":"Alto"})
-df.loc[len(df)] = ({"Opção":"16","Descrição":"Investimento com risco diferente","Custo do investimento (R$)":250,"Retorno esperado (R$)":350,"Risco do investimento (R$)":"Muito Alto"})
+df.loc[len(df)] = ({"Opção":"14","Descrição":"Investimento novo","Custo do investimento (R$)":350000,"Retorno esperado (R$)":350000,"Risco do investimento (R$)":"Alto"})
+df.loc[len(df)] = ({"Opção":"15","Descrição":"Investimento com Erro","Custo do investimento (R$)":-620,"Retorno esperado (R$)":500000,"Risco do investimento (R$)":"Alto"})
+df.loc[len(df)] = ({"Opção":"16","Descrição":"Investimento com risco diferente","Custo do investimento (R$)":250000,"Retorno esperado (R$)":350000,"Risco do investimento (R$)":"Muito Alto"})
 
 #Criando uma nova coluna para descobrir a porcentagem de ganho
 df['Porcentagem de ganho (%)'] = df['Retorno esperado (R$)'] / df['Custo do investimento (R$)'] *100
@@ -45,16 +45,16 @@ selecoes = [resultado.columns.tolist()] + resultado.values.tolist()
 for _, row in df.iterrows():
     custo_investimento = row['Custo do investimento (R$)']
     # Checando se o custo total mais o custo do investivento da linha que está sendo lida é menor que 2400
-    if custo_total + custo_investimento <= 2400:
+    if custo_total + custo_investimento <= 2400000:
       #agora o programa vai ver se o risco medio, alto e baixo já não passaram do valor máximo para cada categoria
         soma_risco_medio = sum(item[2] for item in selecoes if item[4] == 'Médio')
         soma_risco_alto = sum(item[2] for item in selecoes if item[4] == 'Alto')
         soma_risco_baixo = sum(item[2] for item in selecoes if item[4] == 'Baixo')
-        if soma_risco_medio >= 1500:
+        if soma_risco_medio >= 1500000:
             continue
-        elif soma_risco_alto >= 900:
+        elif soma_risco_alto >= 900000:
             continue
-        elif soma_risco_baixo >= 1200:
+        elif soma_risco_baixo >= 1200000:
             continue
         else:
             selecoes.append(row)
